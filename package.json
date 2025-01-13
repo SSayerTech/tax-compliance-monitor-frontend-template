@@ -1,0 +1,38 @@
+{
+  "name": "tax-compliance-monitor-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
+    "chart.js": "^4.4.7",
+    "lucide-vue-next": "^0.468.0",
+    "pinia": "^2.1.7",
+    "vue-chartjs": "^5.3.2"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/tailwindcss": "^6.10.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.10.4",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^8.55.0",
+    "jsdom": "^22.1.0",
+    "nuxt": "^3.8.2",
+    "typescript": "^5.3.3",
+    "vitest": "^1.6.0",
+    "vue": "^3.3.12",
+    "vue-router": "^4.2.5"
+  }
+}
