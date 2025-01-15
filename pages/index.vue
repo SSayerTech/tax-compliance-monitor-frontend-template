@@ -3,7 +3,7 @@
   <div class="space-y-6">
     <!-- Taxpayer Selector -->
     <TaxpayerSelector @select="onTaxpayerSelect" />
-
+    <h2 class="text-2xl font-bold">Risk Overview</h2>
     <!-- Loading State -->
     <div v-if="loading" class="bg-blue-50 text-blue-800 p-4 rounded-lg">
       Loading data...
