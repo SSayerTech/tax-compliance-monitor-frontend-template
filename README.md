@@ -1,4 +1,4 @@
-# Tax Compliance Monitor — Frontend Exercise
+# Tax Compliance Monitor: Frontend Exercise
 
 **Estimated time:** ~3h core · ~4h with bonus tasks
 
@@ -15,7 +15,7 @@ The backend is fully live and returning real data. **Run the app and explore it 
 anything.** Understanding what exists and how it's built is part of the exercise.
 
 You are free to modify any file in this repository. Restructure, rename, or improve anything you
-feel should be better — the existing code is a starting point, not a constraint.
+feel should be better; the existing code is a starting point, not a constraint.
 
 ---
 
@@ -50,8 +50,8 @@ implementing, inspect the backend type definitions and replicate the relevant sh
 ### What you'll see when you run the app
 
 The landing page is a taxpayer selector. Picking a taxpayer navigates to a detail view that shows
-three risk score cards — an overall score (large), a VAT score, and an income tax score (compact)
-— followed by two historical trend charts (risk scores over time and exposure over time). Below the
+three risk score cards: an overall score (large), a VAT score, and an income tax score (compact),
+followed by two historical trend charts (risk scores over time and exposure over time). Below the
 charts there is a **Risk Factors** section that is currently empty: the component has a stub in
 place of a real implementation.
 
@@ -66,18 +66,18 @@ Study these before writing anything:
 | `composables/useRiskApi.ts` | API call pattern: `useRuntimeConfig`, `handleApiError`, `ApiResponse<T>` |
 | `composables/useRiskData.ts` | State management: `loading`, `error`, and data refs around async fetches |
 | `types/risk.ts` | How API response shapes are typed |
-| `utils/format.ts` | `formatCurrency()` and `formatDate()` — use these for all amounts and dates |
+| `utils/format.ts` | `formatCurrency()` and `formatDate()`: use these for all amounts and dates |
 | `pages/taxpayer/[id].vue` | The detail view you will extend |
 | `components/risk/` | Reference for component design and composition patterns |
-| `components/__tests__/` | Existing tests — follow this pattern for Bonus A |
+| `components/__tests__/` | Existing tests (follow this pattern for Bonus A) |
 | `composables/__tests__/` | Existing composable tests |
 
 ---
 
 ## What to implement
 
-Story 1 defines the layout shell. Story 2 completes the existing stub. Stories 3–5 add new
-data sections — do them in any order once the layout is in place.
+Story 1 defines the layout shell. Story 2 completes the existing stub. Stories 3-5 add new
+data sections; do them in any order once the layout is in place.
 
 ---
 
@@ -92,7 +92,7 @@ Getting this right first means each subsequent story drops naturally into its ow
 
 **Acceptance criteria:**
 
-- The detail view has a clear top-level navigation structure — tabs or equivalent — covering all four sections: risk profile, risk exposure, invoices, monitoring
+- The detail view has a clear top-level navigation structure (tabs or equivalent) covering all four sections: risk profile, risk exposure, invoices, monitoring
 - The existing risk components (score cards, trend charts) are intact and rendered under the risk profile section
 - Switching between sections does not trigger additional network requests if the data was already fetched
 - A new user landing on the page can orient themselves without instructions
@@ -102,7 +102,7 @@ Getting this right first means each subsequent story drops naturally into its ow
 ### Story 2: Risk factors `~30 min`
 
 The risk profile already shows score cards and trend charts. The historical data also contains risk
-events — specific incidents that drove score changes, such as late filings or missing declarations.
+events: specific incidents that drove score changes, such as late filings or missing declarations.
 `components/risk/DataTrends.vue` has a stub where this section should render. The analyst needs to
 see which events occurred, when, and why they matter.
 
@@ -113,7 +113,7 @@ Risk events come from `HistoricalRiskData.events` (see `types/risk.ts`). Each `R
 **Acceptance criteria:**
 
 - Risk events are displayed, grouped by period
-- Event types are visually distinct — `LATE_FILING`, `MISSING_DECLARATION`, and `RISK_INCREASE` are immediately distinguishable at a glance
+- Event types are visually distinct: `LATE_FILING`, `MISSING_DECLARATION`, and `RISK_INCREASE` are immediately distinguishable at a glance
 - Each event shows its description and exposure amount
 - Periods with no events are not shown; if the entire history has no events, an appropriate empty state is displayed
 
@@ -123,7 +123,7 @@ Risk events come from `HistoricalRiskData.events` (see `types/risk.ts`). Each `R
 
 An analyst reviewing a taxpayer needs to know which invoices involve counterparts currently on the
 SII blocked list. This is the most operationally sensitive data on the page: a single flagged
-invoice can affect the taxpayer's standing. The `siiRisk` flag is computed live at query time — it
+invoice can affect the taxpayer's standing. The `siiRisk` flag is computed live at query time; it
 is never stored on the invoice itself, so it always reflects the current blocked list.
 
 **`GET /api/invoices/:taxpayerId`**
@@ -158,7 +158,7 @@ Query params (both optional): `type` (`EMITIDA` | `RECIBIDA`), `status` (`VIGENT
 **Acceptance criteria:**
 
 - Invoices are listed with at minimum: folio, type, counterpart name and RUT, amount, date, status
-- `siiRisk: true` invoices are visually distinct and immediately identifiable — a user scanning the list should notice them without reading every row
+- `siiRisk: true` invoices are visually distinct and immediately identifiable: a user scanning the list should notice them without reading every row
 - The `totals` summary (emitidas, recibidas, at-risk count) is visible without scrolling through the full list
 - Filtering by `type` and/or `status` works and updates the list
 - Loading and error states are handled
@@ -190,7 +190,7 @@ and when it last executed. This is a read-only view.
 
 **Acceptance criteria:**
 
-- All config fields are displayed: active status, frequency, schedule window (`startHour`–`endHour`), query count, last executed, next scheduled
+- All config fields are displayed: active status, frequency, schedule window (`startHour`-`endHour`), query count, last executed, next scheduled
 - Fields that are `null` show a meaningful empty state rather than the word "null"
 - `dayOfWeek` and `dayOfMonth` are shown only when relevant (WEEKLY and MONTHLY respectively)
 - Loading and error states are handled
@@ -202,7 +202,7 @@ and when it last executed. This is a read-only view.
 The risk profile tab shows pre-computed scores stored in the database. This endpoint provides a
 complementary live view: how many invoices currently involve blocked counterparts, the total amount
 at stake, and the resulting risk tier. Because it is computed at query time from live data, it can
-diverge from the stored score — and that divergence is itself informative to the analyst.
+diverge from the stored score, and that divergence is itself informative to the analyst.
 
 **`GET /api/risk/:taxpayerId/exposure`**
 
@@ -227,7 +227,7 @@ diverge from the stored score — and that divergence is itself informative to t
 
 ## Bonus tasks
 
-### Bonus A — Tests `~40 min`
+### Bonus A: Tests `~40 min`
 
 Add tests following the existing pattern in `components/__tests__/` and
 `composables/__tests__/`.
@@ -239,13 +239,13 @@ Suggested coverage:
 - Risk exposure composable: correct metrics mapping, error handling
 - A component with meaningful visual behavior (e.g. the `siiRisk` indicator renders correctly)
 
-### Bonus B — Code quality `~45 min`
+### Bonus B: Code quality `~45 min`
 
 Improve the engineering quality of the codebase beyond what the core stories require. Some
 directions worth considering: eliminating duplication across the new composables, shared error
 handling, stronger TypeScript patterns, state management with Pinia.
 
-This is intentionally open-ended. Document what you changed and why in your PR description —
+This is intentionally open-ended. Document what you changed and why in your PR description;
 the reasoning matters as much as the diff.
 
 ---
@@ -256,7 +256,7 @@ Working implementations are the baseline. Beyond that:
 
 | Area | What we look for |
 | ---- | ---------------- |
-| **Integration** | New code fits naturally into the existing codebase — same patterns, same conventions |
+| **Integration** | New code fits naturally into the existing codebase (same patterns, same conventions) |
 | **UX clarity** | Information is easy to scan; `siiRisk` invoices stand out; null/empty states are meaningful |
 | **Component design** | Reasonable separation, reuse where it makes sense, not over-engineered |
 | **Type safety** | API responses typed; no `any`; types defined before or alongside components |
@@ -280,14 +280,14 @@ Working implementations are the baseline. Beyond that:
 
 ```text
 components/
-├── risk/              # Existing components — reference and extend as needed
-│   └── DataTrends.vue # Risk factors section is stubbed — implement in Story 2
-└── __tests__/         # Existing tests — follow this pattern for Bonus A
+├── risk/              # Existing components (reference and extend as needed)
+│   └── DataTrends.vue # Risk factors section is stubbed (implement in Story 2)
+└── __tests__/         # Existing tests (follow this pattern for Bonus A)
 composables/           # Follow useRiskApi / useRiskData patterns
 └── __tests__/
 pages/
 ├── index.vue                  # Taxpayer selector
-└── taxpayer/[id].vue          # Detail view — restructure and extend this
+└── taxpayer/[id].vue          # Detail view (restructure and extend this)
 types/                 # Define new type shapes here
 utils/                 # formatCurrency, formatDate
 ```
