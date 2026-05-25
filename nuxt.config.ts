@@ -28,5 +28,26 @@ export default defineNuxtConfig({
     }
   },
 
+  tailwindcss: {
+    config: {
+      content: [
+        './components/**/*.{vue,js,ts}',
+        './layouts/**/*.vue',
+        './pages/**/*.vue',
+        './app.vue',
+        './composables/**/*.{js,ts}',
+        './utils/**/*.{js,ts}',
+      ]
+    }
+  },
+
+  vite: {
+    server: {
+      watch: {
+        ignored: ['**/.nuxt/**', '**/node_modules/**']
+      }
+    }
+  },
+
   compatibilityDate: '2025-01-06'
 })

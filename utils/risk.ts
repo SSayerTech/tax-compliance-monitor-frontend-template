@@ -2,11 +2,12 @@ import type { RiskLevel } from '@/types/risk';
 import { RISK_LEVEL_COLORS } from '@/constants/theme';
 
 export const getRiskLevel = (score: number): RiskLevel => {
-  // TODO: Implement risk level calculation
-  return 'MEDIUM';
+  if (score <= 40) return 'LOW';
+  if (score <= 70) return 'MEDIUM';
+  return 'HIGH';
 };
 
 export const getRiskLevelColors = (score: number) => {
-  // TODO: Implement color scheme logic
-  return RISK_LEVEL_COLORS.MEDIUM;
+  const level = getRiskLevel(score);
+  return RISK_LEVEL_COLORS[level];
 };
